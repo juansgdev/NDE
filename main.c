@@ -8,6 +8,13 @@ static void activate (GtkApplication* app, void *_data) {
   gtk_layer_init_for_window(gtk_window);
 
   // Set behind other programs
+  // GTK_LAYER_SHELL_LAYER_TOP --> above common windows
+  // GTK_LAYER_SHELL_LAYER_OVERLAY --> above all
+
+  // gtk_layer_set_layer(gtk_window, GTK_LAYER_SHELL_LAYER_TOP);
+  // gtk_window_fullscreen(GTK_WINDOW(gtk_window));
+  // set window above the common windows
+  
   gtk_layer_set_layer(gtk_window, GTK_LAYER_SHELL_LAYER_BACKGROUND);
   gtk_layer_auto_exclusive_zone_enable(gtk_window);
 
@@ -20,10 +27,19 @@ static void activate (GtkApplication* app, void *_data) {
     gtk_layer_set_anchor(gtk_window, i, anchors[i]);
   }
 
-  // Create and append webview in window
-  GtkWidget *webapp;
-  webapp = webkit_web_view_new();
-  webkit_web_view_load_uri(WEBKIT_WEB_VIEW(webapp), "file:///home/juan/dev/nde/index.html");
+  // Create, configure and append webview to the window in lines below
+  WebKitWebView *webapp = WEBKIT_WEB_VIEW(webkit_web_view_new());
+  
+  // webview configs & debug
+  WebKitSettings *settings = webkit_web_view_get_settings(webapp);
+  webkit_settings_set_enable_html5_local_storage(settings, TRUE);
+  webkit_settings_set_allow_file_access_from_file_urls(settings, TRUE);
+  webkit_settings_set_allow_universal_access_from_file_urls(settings, TRUE);
+  webkit_settings_set_enable_javascript(settings, TRUE);
+  webkit_settings_set_enable_developer_extras(settings, TRUE);
+  webkit_web_view_set_settings(webapp, settings);
+
+  webkit_web_view_load_uri(WEBKIT_WEB_VIEW(webapp), "file:///home/juan/dev/nde/app/index.html");
   gtk_container_add(GTK_CONTAINER(gtk_window), webapp);
   gtk_widget_show_all(GTK_WIDGET(gtk_window));
 }
