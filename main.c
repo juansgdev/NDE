@@ -40,7 +40,7 @@ static void activate (GtkApplication* app, void *_data) {
   webkit_web_view_set_settings(webapp, settings);
 
   webkit_web_view_load_uri(WEBKIT_WEB_VIEW(webapp), "file:///home/juan/dev/nde/app/index.html");
-  gtk_container_add(GTK_CONTAINER(gtk_window), webapp);
+  gtk_container_add(GTK_CONTAINER(gtk_window), GTK_WIDGET(webapp));
   gtk_widget_show_all(GTK_WIDGET(gtk_window));
 }
 
