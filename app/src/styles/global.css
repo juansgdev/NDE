@@ -19,33 +19,6 @@
     --secondary-lighter: #383f53;   
 }
 
-h1 {
-    font-size: 36px;
-}
-h2 {
-    font-size: 20px;
-}
-
-.p-brand {
-    font-family: Georgia;
-}
-
-/* COMPONENTES COMUNS */
-
-section, main, header, footer {
-    background: var(--secondary-color);
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.container {
-    background: var(--secondary-color);
-    margin: 20px;
-    padding: 20px;
-    border-radius: 8px;
-}
-
 #modal {
     width: 60vw;
     height: 90vh;
@@ -60,69 +33,11 @@ button {
     border-radius: 10px;
 }
 
-.p-button {
-    width: 130px;
-    height: 60px; padding: 0 10px;
-}
-
 .glass {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 25px;
     backdrop-filter: blur(4px);
     border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-body {
-    background: var(--primary-color);
-}
-
-/* GRADE */
-
-body {
-  background-image: 
-    linear-gradient(#ffffff 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff 1px, transparent 1px);
-  background-size: 120px 120px; 
-  background-position: -60px -60px;
-}
-
-/* NAV */
-
-.p-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 120px;
-}
-
-.p-nav img {
-    width: 60px;
-}
-
-/* FORMULÁRIO */
-
-.p-form {
-    display: flex;
-    flex-direction: column;
-    margin: 24px 0;
-}
-
-.form-label {
-    font-size: 20px;
-    margin-bottom: 6px;
-}
-
-.form-input {
-    color: black;
-    outline: none;
-    margin-bottom: 18px;
-    border: none;
-    border-radius: 4px;
-    padding: 4px;
-}
-
-.form-input:focus {
-    outline: none;
 }
 
 /* ANIMAÇÕES */

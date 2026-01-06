@@ -1,6 +1,14 @@
+#include <stdlib.h>
 #include <gtk-layer-shell/gtk-layer-shell.h>
 #include <webkit2/webkit2.h>
 #include <gtk/gtk.h>
+
+void exec_app (WebKitUserContentManager *manager, WebKitJavascriptResult   *js_result, gpointer user_data) {
+  JSCValue *value = webkit_javascript_result_get_js_value(js_result);
+  char *program = jsc_value_to_string(value);
+
+  system(program);
+}
 
 static void activate (GtkApplication* app, void *_data) {
   GtkWindow *gtk_window = GTK_WINDOW(gtk_application_window_new(app));
@@ -27,8 +35,12 @@ static void activate (GtkApplication* app, void *_data) {
     gtk_layer_set_anchor(gtk_window, i, anchors[i]);
   }
 
+  WebKitUserContentManager *manager = webkit_user_content_manager_new();
+  webkit_user_content_manager_register_script_message_handler(manager, "app_entry");
+  g_signal_connect(manager, "script-message-received::app_entry", G_CALLBACK(exec_app), gtk_window);
+
   // Create, configure and append webview to the window in lines below
-  WebKitWebView *webapp = WEBKIT_WEB_VIEW(webkit_web_view_new());
+  WebKitWebView *webapp = WEBKIT_WEB_VIEW(webkit_web_view_new_with_user_content_manager(manager));
   
   // webview configs & debug
   WebKitSettings *settings = webkit_web_view_get_settings(webapp);

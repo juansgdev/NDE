@@ -1,3 +1,4 @@
 .vscode/
 nde
 references/
+app/src/data/*
